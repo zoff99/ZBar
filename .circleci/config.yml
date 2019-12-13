@@ -30,7 +30,12 @@ jobs:
       - run: mkdir -p ~/work/deploy
       - run: autoreconf -v --install -f
       - run: ./configure --without-python --without-gtk --without-qt --without-java --without-x --with-gtk=no --with-x=no
-      - run: make -j $(nproc)
+      - run: make -j $(nproc) check
+      - run: file ./zbarcam/.libs/zbarcam
+      - run: ls -hal ./zbarcam/.libs/zbarcam
+      - run: ls -al ./zbarcam/.libs/zbarcam
+      - run: ldd ./zbarcam/.libs/zbarcam
+      - run: ./zbarcam/.libs/zbarcam --help
 
       #- store_artifacts:
       #    path: ~/work/deploy
