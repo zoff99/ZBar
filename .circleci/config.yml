@@ -23,14 +23,14 @@ jobs:
           libmagickwand-dev libmagickwand-6-headers
           imagemagick autoconf gettext
           build-essential
-          
+
 
       - checkout
       - run: ls -al; pwd
 
       - run: mkdir -p ~/work/deploy
-      - run: autoreconf --install
-      
+      - run: autoreconf --install || echo "still ok"
+      - run: ./configure --without-python --without-perl --with-graphicsmagick--without-gtk --without-qt --without-java
 
       #- store_artifacts:
       #    path: ~/work/deploy
