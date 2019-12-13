@@ -34,8 +34,8 @@ jobs:
       - run: file ./zbarcam/.libs/zbarcam
       - run: ls -hal ./zbarcam/.libs/zbarcam
       - run: ls -al ./zbarcam/.libs/zbarcam
-      - run: ldd ./zbarcam/.libs/zbarcam
-      - run: ./zbarcam/.libs/zbarcam --help
+      - run: export LD_LIBRARY_PATH=./zbar/.libs/ ; ldd ./zbarcam/.libs/zbarcam
+      - run: export LD_LIBRARY_PATH=./zbar/.libs/ ; ./zbarcam/.libs/zbarcam --help
 
       #- store_artifacts:
       #    path: ~/work/deploy
