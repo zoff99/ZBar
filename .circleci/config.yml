@@ -29,8 +29,8 @@ jobs:
       - run: ls -al; pwd
 
       - run: mkdir -p ~/work/deploy
-      - run: autoreconf --install || echo "still ok"
-      - run: ./configure --without-python --without-perl --with-graphicsmagick--without-gtk --without-qt --without-java
+      - run: autoreconf -v --install -f
+      - run: ./configure --without-python --without-gtk --without-qt --without-java --without-x --with-gtk=no --with-x=no
 
       #- store_artifacts:
       #    path: ~/work/deploy
