@@ -1,0 +1,38 @@
+---
+version: 2
+
+workflows:
+  version: 2
+  build_linux:
+    jobs:
+      - build
+
+jobs:
+  build:
+    working_directory: ~/work
+    docker:
+      - image: ubuntu:bionic
+
+    steps:
+      - run: pwd; ls -al; id -a
+      - run: apt update &&
+          apt install -y
+          zip grep file ca-certificates autotools-dev autoconf automake
+          git bc wget rsync cmake make pkg-config yasm libtool
+          libv4l-dev ssh gzip tar
+          libmagickwand-dev libmagickwand-6-headers
+          imagemagick autoconf
+          
+
+      - checkout
+      - run: ls -al; pwd
+
+      - run: mkdir -p ~/work/deploy
+      - run: autoreconf --install
+      
+
+      #- store_artifacts:
+      #    path: ~/work/deploy
+      #    destination: deploy
+
+
