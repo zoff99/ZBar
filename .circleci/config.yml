@@ -21,7 +21,7 @@ jobs:
           git bc wget rsync cmake make pkg-config yasm libtool
           libv4l-dev ssh gzip tar
           libmagickwand-dev libmagickwand-6-headers
-          imagemagick autoconf gettext
+          imagemagick autoconf gettext libjpeg-turbo8-dev
           build-essential libv4l-dev coreutils
 
       - checkout
@@ -31,7 +31,7 @@ jobs:
       - run: autoreconf -v --install -f
       - run: ./configure --without-python --without-gtk --without-qt --without-java --without-x --with-gtk=no --with-x=no
       - run: make -j $(nproc) check
-      - run: gcc -Wall -Wno-parentheses -g -O2 -o zbarcam/.libs/zbarcam zbarcam/zbarcam.o zbar/.libs/libzbar.a -ljpeg -lpthread
+      - run: gcc -Wall -Wno-parentheses -g -O2 -o zbarcam/.libs/zbarcam zbarcam/zbarcam.o zbar/.libs/libzbar.a -l:libjpeg.a -lpthread
       - run: file ./zbarcam/.libs/zbarcam
       - run: ls -hal ./zbarcam/.libs/zbarcam
       - run: ls -al ./zbarcam/.libs/zbarcam
