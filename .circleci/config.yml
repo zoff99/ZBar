@@ -31,11 +31,12 @@ jobs:
       - run: autoreconf -v --install -f
       - run: ./configure --without-python --without-gtk --without-qt --without-java --without-x --with-gtk=no --with-x=no
       - run: make -j $(nproc) check
+      - run: gcc -Wall -Wno-parentheses -g -O2 -o zbarcam/.libs/zbarcam zbarcam/zbarcam.o zbar/.libs/libzbar.a -ljpeg -lpthread
       - run: file ./zbarcam/.libs/zbarcam
       - run: ls -hal ./zbarcam/.libs/zbarcam
       - run: ls -al ./zbarcam/.libs/zbarcam
-      - run: export LD_LIBRARY_PATH=./zbar/.libs/ ; ldd ./zbarcam/.libs/zbarcam
-      - run: export LD_LIBRARY_PATH=./zbar/.libs/ ; ./zbarcam/.libs/zbarcam --help
+      - run: ldd ./zbarcam/.libs/zbarcam
+      - run: ./zbarcam/.libs/zbarcam --help
 
       #- store_artifacts:
       #    path: ~/work/deploy
