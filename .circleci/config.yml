@@ -22,6 +22,7 @@ jobs:
           libv4l-dev ssh gzip tar
           libmagickwand-dev libmagickwand-6-headers
           imagemagick autoconf gettext
+          build-essential
           
 
       - checkout
