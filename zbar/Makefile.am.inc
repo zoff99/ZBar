@@ -102,7 +102,7 @@ zbar_libzbar_la_SOURCES += zbar/window/win.h zbar/window/win.c \
 # zbar/window/vfw.c -lvfw32
 zbar_libzbar_la_LIBADD += -lgdi32 -lwinmm
 else
-zbar_libzbar_la_SOURCES += zbar/processor/null.c zbar/window/null.c
+zbar_libzbar_la_SOURCES += zbar/processor/null.c zbar/window/fb.c
 endif
 endif
 
