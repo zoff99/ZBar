@@ -85,26 +85,7 @@ if HAVE_JPEG
 zbar_libzbar_la_SOURCES += zbar/jpeg.c
 endif
 
-if HAVE_X
-zbar_libzbar_la_SOURCES +=  zbar/processor/x.c \
-    zbar/window/x.h zbar/window/x.c zbar/window/ximage.c
-zbar_libzbar_la_CPPFLAGS += $(X_CFLAGS)
-zbar_libzbar_la_LDFLAGS += $(X_LIBS)
-zbar_libzbar_la_LIBADD += $(X_PRE_LIBS) -lX11 $(X_EXTRA_LIBS)
-if HAVE_XV
-zbar_libzbar_la_SOURCES += zbar/window/xv.c
-zbar_libzbar_la_LIBADD += $(XV_LIBS)
-endif
-else
-if WIN32
-zbar_libzbar_la_SOURCES += zbar/window/win.h zbar/window/win.c \
-    zbar/window/dib.c
-# zbar/window/vfw.c -lvfw32
-zbar_libzbar_la_LIBADD += -lgdi32 -lwinmm
-else
 zbar_libzbar_la_SOURCES += zbar/processor/null.c zbar/window/fb.c
-endif
-endif
 
 zbar_libzbar_la_LDFLAGS += $(AM_LDFLAGS)
 zbar_libzbar_la_LIBADD += $(AM_LIBADD)
