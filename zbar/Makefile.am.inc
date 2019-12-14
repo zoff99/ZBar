@@ -41,6 +41,7 @@ if ENABLE_PDF417
 zbar_libzbar_la_SOURCES += zbar/decoder/pdf417.h zbar/decoder/pdf417.c \
     zbar/decoder/pdf417_hash.h
 endif
+
 if ENABLE_QRCODE
 zbar_libzbar_la_SOURCES += zbar/qrcode.h \
     zbar/decoder/qr_finder.h zbar/decoder/qr_finder.c \
@@ -52,40 +53,18 @@ zbar_libzbar_la_SOURCES += zbar/qrcode.h \
     zbar/qrcode/util.h zbar/qrcode/util.c
 endif
 
-if WIN32
-zbar_libzbar_la_SOURCES += zbar/processor/win.c zbar/libzbar.rc
-zbar_libzbar_la_CPPFLAGS += -mthreads
-zbar_libzbar_la_LDFLAGS += -mthreads
-# FIXME broken
-zbar_libzbar_la_LIBADD += zbar/libzbar-rc.lo
-else
-zbar_libzbar_la_SOURCES += zbar/processor/posix.h zbar/processor/posix.c
-endif
 
 if HAVE_V4L2
 zbar_libzbar_la_SOURCES += zbar/video/v4l.c zbar/video/v4l2.c
 endif
-if HAVE_V4L1
-if !HAVE_V4L2
-zbar_libzbar_la_SOURCES += zbar/video/v4l.c
-endif
-zbar_libzbar_la_SOURCES += zbar/video/v4l1.c
-endif
-if WIN32
-if HAVE_VIDEO
-zbar_libzbar_la_SOURCES += zbar/video/vfw.c
-zbar_libzbar_la_LIBADD += -lvfw32
-endif
-endif
-if !HAVE_VIDEO
-zbar_libzbar_la_SOURCES += zbar/video/null.c
-endif
+
 
 if HAVE_JPEG
 zbar_libzbar_la_SOURCES += zbar/jpeg.c
 endif
 
-zbar_libzbar_la_SOURCES += zbar/processor/null.c zbar/window/fb.c
+zbar_libzbar_la_SOURCES += zbar/processor/posix.h zbar/processor/posix.c
+zbar_libzbar_la_SOURCES += zbar/processor/fb.c zbar/window/fb.c
 
 zbar_libzbar_la_LDFLAGS += $(AM_LDFLAGS)
 zbar_libzbar_la_LIBADD += $(AM_LIBADD)

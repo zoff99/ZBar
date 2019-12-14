@@ -100,11 +100,11 @@ int _zbar_window_begin (zbar_window_t *w)
     // map framebuffer to user memory
     framebuffer_screensize = (size_t)var_framebuffer_fix_info.smem_len;
     framebuffer_mappedmem = NULL;
-    framebuffer_mappedmem = (char *)mmap(NULL,
-                                         (size_t)framebuffer_screensize,
-                                         PROT_READ | PROT_WRITE,
-                                         MAP_SHARED,
-                                         global_framebuffer_device_fd, 0);
+    framebuffer_mappedmem = (unsigned char *)mmap(NULL,
+                                            (size_t)framebuffer_screensize,
+                                            PROT_READ | PROT_WRITE,
+                                            MAP_SHARED,
+                                            global_framebuffer_device_fd, 0);
 
     if (framebuffer_mappedmem == NULL)
     {
@@ -122,7 +122,7 @@ int _zbar_window_end (zbar_window_t *w)
 {
     if (framebuffer_mappedmem != NULL)
     {
-        int res = munmap(framebuffer_mappedmem, (size_t)framebuffer_screensize);
+        munmap(framebuffer_mappedmem, (size_t)framebuffer_screensize);
         framebuffer_mappedmem = NULL;
     }
 
